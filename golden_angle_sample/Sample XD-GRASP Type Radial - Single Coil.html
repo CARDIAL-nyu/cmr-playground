@@ -14390,8 +14390,8 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Visualize-the-non-cartesian-k-space-data">Visualize the non-cartesian k-space data<a class="anchor-link" href="#Visualize-the-non-cartesian-k-space-data">¶</a></h1><ul>
 <li>this would be similar to what we'd get out of an MRI machine that was scanning using a non-cartesian radial trajectory with a <strong>single</strong> coil</li>
-<li>if you look at the 2nd subplot below, you'll notice that non-cartesian k-space data that's acquired at the MRI machine does not fall nicely on a grid</li>
-<li>this is what makes the simple radial masks on fully-sampled cartesian data from the <code>RefineGAN</code> repository a little unrealistic because with that simple radial mask, you're still obtaining exactly the acquired data without any interpolation that distorts the measured signals.</li>
+<li>if you look at the 2nd subplot below, you'll notice that non-cartesian k-space data that's acquired with the MRI machine does not fall nicely on a grid</li>
+<li>this is what makes the radial masks on fully-sampled cartesian data from the <code>RefineGAN</code> repository a little different than reality; with just the simple radial mask placed on top of fully sampled data, you're still using exact acquired data without any of the distortions that would've been introduced by interpolating acquired non-cartesian data onto a cartesian grid.</li>
 </ul>
 
 </div>
@@ -14461,7 +14461,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Reconstruct-the-image-from-the-non-cartesian-data">Reconstruct the image from the non-cartesian data<a class="anchor-link" href="#Reconstruct-the-image-from-the-non-cartesian-data">¶</a></h1><ul>
-<li>since the data does not fall on a neat uniformly spaced grid that's required for typical <code>FFT</code>, we need to use the adjoint operator of the non-uniform FFT (<code>NUFFT</code>) to go from non-cartesian k-space to image space</li>
+<li>since the data does not fall on a neat uniformly spaced grid that's required for typical <code>FFT</code> reconstruction, we need to use the adjoint operator of the non-uniform FFT (<code>NUFFT</code>) to go from non-cartesian k-space to image space</li>
 </ul>
 
 </div>
@@ -14527,8 +14527,8 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Without-density-compensation">Without density-compensation<a class="anchor-link" href="#Without-density-compensation">¶</a></h1><ul>
-<li>radial k-space data without density compensation will be dominated by low-frequency contrast</li>
-<li>this density-compensation is another aspect of non-cartesian radial k-space reconstruction that's not part of cartesian k-space reconstruction</li>
+<li>radial k-space data without density compensation will be dominated by low-frequency content; <code>back_no_density_compensation</code> will have a blown out blurry look to it</li>
+<li>this density-compensation is another aspect of non-cartesian radial k-space reconstruction that's not part of cartesian k-space reconstruction.  the oversampling of low-frequency k-space is a feature of radial sampling.</li>
 </ul>
 
 </div>
@@ -14587,9 +14587,9 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Now-bring-the-reconstructed-image-back-into-cartesian-k-space">Now bring the reconstructed image back into cartesian k-space<a class="anchor-link" href="#Now-bring-the-reconstructed-image-back-into-cartesian-k-space">¶</a></h1><ul>
-<li>if we now take the reconstructed image (derived from non-cartesian k-space data) and perform a standard <code>FFT</code>, we can get cartesian k-space data</li>
-<li>note that going from non-cartesian radial k-space data to cartesian k-space data requires a gridding operation that interpolates the radial data onto a cartesian grid.  this interpolation does introduce some artifacts, since the data in this cartesian k-space aren't the truly measured data from the magnets; they are the interpolated values onto a uniform grid.</li>
-<li>also note that radial k-space data does not extend all the radial spokes to the edges, but appears as a circle inscribed inside a rectangle</li>
+<li>if we now take the density-compensated reconstructed image (i.e. the one derived from non-cartesian k-space data) and perform a standard <code>FFT</code>, we can get cartesian k-space data</li>
+<li>recall that going from non-cartesian radial k-space data to cartesian k-space data requires a gridding operation that interpolates the radial data onto a cartesian grid.  this interpolation does introduce some artifacts, since the data in this new <strong>cartesian</strong> k-space isn't the truly measured data from the coils-- they are the interpolated values onto the cartesian grid.</li>
+<li>also note that radial k-space data does not extend all the radial spokes to the edges of the image, but appears as a circle inscribed inside a rectangle.  this is another slight difference to the radial mask in <code>RefineGAN</code>.</li>
 </ul>
 
 </div>
@@ -14650,7 +14650,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Finally,-we-can-apply-an-inverse-FFT-to-get-back-to-image-space">Finally, we can apply an inverse FFT to get back to image space<a class="anchor-link" href="#Finally,-we-can-apply-an-inverse-FFT-to-get-back-to-image-space">¶</a></h1><ul>
-<li>this will not be identical to the original <code>square_cine</code> image, since the non-cartesian gridding operations necessarily create new data that was not actually measured, but should be pretty close</li>
+<li>this will not be identical to the original <code>square_cine</code> image, since the non-cartesian gridding operations necessarily create new data that was not actually measured, but it should be pretty close</li>
 </ul>
 
 </div>
@@ -14706,6 +14706,18 @@ a.anchor-link {
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Remarks">Remarks<a class="anchor-link" href="#Remarks">¶</a></h1><ul>
+<li>in this notebook, we only worked on a single frame from the cine and treated it as a single-coil acquisition</li>
+<li>the next notebook will cover the case of multi-coil non-cartesian acquisition, with combination of the multi-coil data using <code>SENSE</code> type operators along with the coil sensitivity maps that we have calculated and dumped into the <code>ocmr_intermediate.hdf5</code> container.<ul>
+<li>we'll also cover a more realistic scenario in which the different frames of the cine have different radial sampling patterns (e.g. different number of radial spokes with a more random mix of angles), as is typical in our cardiac MRI data that has been sorted.</li>
+</ul>
+</li>
+</ul>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
