@@ -13992,7 +13992,7 @@ a.anchor-link {
 <span class="k">if</span> <span class="s1">'miniconda'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">:</span>
     <span class="o">%</span><span class="k">matplotlib</span> inline
     <span class="o">!{</span>sys.executable<span class="o">}</span> -m pip install --force https://github.com/chengs/tqdm/archive/colab.zip
-    <span class="o">!{</span>sys.executable<span class="o">}</span> -m pip install sigpy h5py
+    <span class="o">!{</span>sys.executable<span class="o">}</span> -m pip install sigpy h5py tqdm
     <span class="o">!</span> git clone https://github.com/CARDIAL-nyu/cmr-playground
     <span class="o">%</span><span class="k">cd</span> cmr-playground/golden_angle_sample
 <span class="k">else</span><span class="p">:</span>
@@ -14027,7 +14027,10 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">sigpy.plot</span>
 <span class="kn">import</span> <span class="nn">sigpy.mri</span>
 <span class="kn">import</span> <span class="nn">h5py</span>
-<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">trange</span><span class="p">,</span> <span class="n">tqdm</span>
+<span class="k">if</span> <span class="s1">'miniconda'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span><span class="p">,</span> <span class="n">tqdm</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">trange</span><span class="p">,</span> <span class="n">tqdm</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">'fivethirtyeight'</span><span class="p">)</span>
 <span class="n">five_thirty_eight</span> <span class="o">=</span> <span class="p">[</span>
@@ -14235,9 +14238,9 @@ a.anchor-link {
 
 
 
-<div id="54934a31-ad22-4199-b0d2-f13fd66bcc3c" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
+<div id="32435497-f988-49fe-9bcc-c6066660d098" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
 <script type="text/javascript">
-var element = document.getElementById('54934a31-ad22-4199-b0d2-f13fd66bcc3c');
+var element = document.getElementById('32435497-f988-49fe-9bcc-c6066660d098');
 /* Put everything inside the global mpl namespace */
 /* global mpl */
 window.mpl = {};
@@ -15316,9 +15319,9 @@ if (IPython.notebook.kernel !== null) {
 
 
 
-<div id="54934a31-ad22-4199-b0d2-f13fd66bcc3c" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
+<div id="32435497-f988-49fe-9bcc-c6066660d098" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
 <script type="text/javascript">
-var element = document.getElementById('54934a31-ad22-4199-b0d2-f13fd66bcc3c');
+var element = document.getElementById('32435497-f988-49fe-9bcc-c6066660d098');
 /* Put everything inside the global mpl namespace */
 /* global mpl */
 window.mpl = {};
@@ -16578,9 +16581,9 @@ if (IPython.notebook.kernel !== null) {
 
 
 
-<div id="54934a31-ad22-4199-b0d2-f13fd66bcc3c" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
+<div id="32435497-f988-49fe-9bcc-c6066660d098" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
 <script type="text/javascript">
-var element = document.getElementById('54934a31-ad22-4199-b0d2-f13fd66bcc3c');
+var element = document.getElementById('32435497-f988-49fe-9bcc-c6066660d098');
 /* Put everything inside the global mpl namespace */
 /* global mpl */
 window.mpl = {};
@@ -17558,9 +17561,9 @@ if (IPython.notebook.kernel !== null) {
 
 
 
-<div id="f37692ea-2087-40e0-9a1a-c503a1318eb7" class="jupyter-widgets jp-OutputArea-output ">
+<div id="1f513363-08e8-4783-93c7-4c545c8e64ae" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('f37692ea-2087-40e0-9a1a-c503a1318eb7');
+var element = document.getElementById('1f513363-08e8-4783-93c7-4c545c8e64ae');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "5fe79d0cf92249f596e4326e70c5e5f5", "version_major": 2, "version_minor": 0}
@@ -17726,9 +17729,9 @@ var element = document.getElementById('f37692ea-2087-40e0-9a1a-c503a1318eb7');
 
 
 
-<div id="72b51766-25a0-44e9-aeb6-3cb6c7e15981" class="jupyter-widgets jp-OutputArea-output ">
+<div id="d24fa9cb-b94a-40a0-a2f7-2b0b4bc93924" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('72b51766-25a0-44e9-aeb6-3cb6c7e15981');
+var element = document.getElementById('d24fa9cb-b94a-40a0-a2f7-2b0b4bc93924');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "56a05bf4ef984de4b0d8e127c4209928", "version_major": 2, "version_minor": 0}
@@ -17800,9 +17803,9 @@ var element = document.getElementById('72b51766-25a0-44e9-aeb6-3cb6c7e15981');
 
 
 
-<div id="54934a31-ad22-4199-b0d2-f13fd66bcc3c" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
+<div id="32435497-f988-49fe-9bcc-c6066660d098" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
 <script type="text/javascript">
-var element = document.getElementById('54934a31-ad22-4199-b0d2-f13fd66bcc3c');
+var element = document.getElementById('32435497-f988-49fe-9bcc-c6066660d098');
 /* Put everything inside the global mpl namespace */
 /* global mpl */
 window.mpl = {};
@@ -18810,9 +18813,9 @@ if (IPython.notebook.kernel !== null) {
 
 
 
-<div id="54934a31-ad22-4199-b0d2-f13fd66bcc3c" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
+<div id="32435497-f988-49fe-9bcc-c6066660d098" class="jp-RenderedJavaScript jp-OutputArea-output " data-mime-type="application/javascript">
 <script type="text/javascript">
-var element = document.getElementById('54934a31-ad22-4199-b0d2-f13fd66bcc3c');
+var element = document.getElementById('32435497-f988-49fe-9bcc-c6066660d098');
 /* Put everything inside the global mpl namespace */
 /* global mpl */
 window.mpl = {};
